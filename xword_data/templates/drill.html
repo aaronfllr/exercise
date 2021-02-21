@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<h1>Crossword Hints</h1>
+<!-- Display Clue Objects, entry_text length hint as well as publisher and clue_text, forced input into uppercase -->
+
+<ul>
+  {% for clue in object_list|slice:":1" %}
+    <li>Tries: </li>
+      <a id="tries" >0</a>
+    <li id="answer" value="">Word length: {{ clue.entry.entry_text|length }}</li>
+    <li>Hint: {{ clue.clue_text }} </li>
+    <li>Publisher: {{ clue.puzzle.publisher }} </li>
+    <form>
+        <label for="guess">I think it is: </label>
+        <input id="guess" type="text" name="guess" onkeyup="this.value = this.value.toUpperCase();">
+        <input type="submit" value="Is this it?" onclick="return calculate()">
+    </form>
+    <h1 id="letsSee">
+
+    </h1>
+  {% endfor %}
+</ul>
+<a href="answer/">To Answer</a>
+
+<!-- Tried using javascript to handle tries counter and validation of answer input-->
+<script>
+const answerElement = document.getElementById('guess');
+const triesElement = document.getElementById('tries');
+const correctanswerElement = document.getElementById('answer').value;
+function calculate(){
+  let tries = 0
+  if (answerElement == correctanswerElement){
+    document.getElementById("letsSee").innerHTML = "That's right!!";
+
+  }
+  else {
+    document.getElementById("letsSee").innerHTML = "Nope :(";
+    document.getElementById("tries").innerHTML =  tries += 1;
+    return false;
+  }
+}
+
+
+</script>

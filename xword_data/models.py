@@ -16,9 +16,3 @@ class Clue(models.Model):
     puzzle = models.ForeignKey(Puzzle, on_delete=models.CASCADE)
     clue_text = models.CharField(max_length=512, blank=False)
     theme = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.entry.entry_text
-
-    def __str__(self):
-        return self.puzzle.title
